@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barry Carroll</title>
+<meta name="description" content="Barry Carroll - engineering leader based in Dublin, Ireland.">
+<style>
+  :root {
+    --bg: #fdfdfb;
+    --ink: #1c1c1a;
+    --muted: #6b6b66;
+    --line: #e4e2db;
+    --accent: #3e6b89;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 6vh 1.5rem;
+  }
+
+  main {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .eyebrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    margin: 0 0 0.9rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0 0 0.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  p.bio {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 0 2.2rem;
+    max-width: 42ch;
+  }
+
+  ul.links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  ul.links li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  ul.links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.95rem 0.1rem;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 1rem;
+    transition: color 0.15s ease;
+  }
+
+  ul.links a:hover,
+  ul.links a:focus-visible {
+    color: var(--accent);
+  }
+
+  .link-label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .link-name {
+    font-weight: 500;
+  }
+
+  .link-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+  }
+
+  .arrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--muted);
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+
+  ul.links a:hover .arrow,
+  ul.links a:focus-visible .arrow {
+    color: var(--accent);
+    transform: translateX(2px);
+  }
+
+  footer {
+    margin-top: 2.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 400px) {
+    h1 { font-size: 1.7rem; }
+  }
+</style>
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "38aafde3cd5b407fbeda43cd3fc4a66c"}' />
+</head>
+<body>
+  <main>
+    <p class="eyebrow">// dublin, ireland</p>
+    <h1>Barry Carroll</h1>
+    <p class="bio">Engineering leader. I build things to understand them, then usually keep tinkering long after they work.</p>
+
+    <ul class="links">
+      <li>
+        <a href="/uisce">
+          <span class="link-label">
+            <span class="link-name">Uisce</span>
+            <span class="link-desc">Tracking Irish Water service outages</span>
+          </span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/barrymcarroll" target="_blank" rel="noopener">
+          <span class="link-label">
+            <span class="link-name">LinkedIn</span>
+            <span class="link-desc">Career background and work history</span>
+          </span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/baz8080" target="_blank" rel="noopener">
+          <span class="link-label">
+            <span class="link-name">GitHub</span>
+            <span class="link-desc">Code and side projects</span>
+          </span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </li>
+    </ul>
+
+    <footer>&copy; 2026 Barry Carroll</footer>
+  </main>
+</body>
+</html>
