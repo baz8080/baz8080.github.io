@@ -3,17 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
 <meta name="google-site-verification" content="FBaip1BNX0buYII51P02o6KTNYKl-8VdRUOMcUo569E" />
 <title>Barry Carroll</title>
 <meta name="description" content="Barry Carroll - engineering leader based in Dublin, Ireland.">
+<script>
+  // Apply a saved theme choice before first paint to avoid a flash.
+  try {
+    var savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      document.documentElement.dataset.theme = savedTheme;
+    }
+  } catch (e) {}
+</script>
 <style>
   :root {
+    color-scheme: light dark;
     --bg: #fdfdfb;
     --ink: #1c1c1a;
     --muted: #6b6b66;
     --line: #e4e2db;
     --accent: #3e6b89;
   }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141413;
+      --ink: #e8e6df;
+      --muted: #a09e96;
+      --line: #2c2b27;
+      --accent: #8db4cf;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #141413;
+    --ink: #e8e6df;
+    --muted: #a09e96;
+    --line: #2c2b27;
+    --accent: #8db4cf;
+  }
+
+  :root[data-theme="light"] { color-scheme: light; }
+  :root[data-theme="dark"] { color-scheme: dark; }
 
   * { box-sizing: border-box; }
 
@@ -122,10 +154,63 @@
     margin-top: 2.5rem;
     font-size: 0.8rem;
     color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .theme-toggle {
+    font: inherit;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .theme-toggle:hover,
+  .theme-toggle:focus-visible {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .theme-toggle:focus-visible,
+  ul.links a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
   @media (max-width: 400px) {
     h1 { font-size: 1.7rem; }
+  }
+
+  /* Stronger secondary text and dividers for users who ask for more contrast. */
+  @media (prefers-contrast: more) {
+    body {
+      --muted: color-mix(in srgb, var(--ink) 85%, var(--bg));
+      --line: color-mix(in srgb, var(--ink) 45%, var(--bg));
+    }
+  }
+
+  /* Windows High Contrast: keep dividers and the toggle border visible. */
+  @media (forced-colors: active) {
+    body { --line: CanvasText; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ul.links a,
+    .arrow,
+    .theme-toggle {
+      transition: none;
+    }
+
+    ul.links a:hover .arrow,
+    ul.links a:focus-visible .arrow {
+      transform: none;
+    }
   }
 </style>
 <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "38aafde3cd5b407fbeda43cd3fc4a66c"}'></script>
@@ -184,7 +269,45 @@
       </li>
     </ul>
 
-    <footer>&copy; 2026 Barry Carroll</footer>
+    <footer>
+      <span>&copy; 2026 Barry Carroll</span>
+      <button type="button" class="theme-toggle" id="theme-toggle" hidden>Theme: system</button>
+    </footer>
   </main>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var button = document.getElementById('theme-toggle');
+      var order = ['system', 'light', 'dark'];
+
+      function current() {
+        return root.dataset.theme || 'system';
+      }
+
+      function render() {
+        button.textContent = 'Theme: ' + current();
+      }
+
+      button.addEventListener('click', function () {
+        var next = order[(order.indexOf(current()) + 1) % order.length];
+        if (next === 'system') {
+          delete root.dataset.theme;
+        } else {
+          root.dataset.theme = next;
+        }
+        try {
+          if (next === 'system') {
+            localStorage.removeItem('theme');
+          } else {
+            localStorage.setItem('theme', next);
+          }
+        } catch (e) {}
+        render();
+      });
+
+      render();
+      button.hidden = false;
+    })();
+  </script>
 </body>
 </html>
